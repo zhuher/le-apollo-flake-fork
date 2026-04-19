@@ -1,7 +1,7 @@
 {
   description = "Apollo is a Game stream host for Moonlight";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/9cf7092bdd603554bd8b63c216e8943cf9b12512"; # rev I happened to be using at the moment
   };
   outputs = {nixpkgs, ...}: let
     supportedSystems = [

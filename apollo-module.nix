@@ -150,26 +150,26 @@ in {
 
     # Firewall configuration: Verify these ports with Apollo's documentation.
     # These are based on the Sunshine defaults.
+    # https://docs.lizardbyte.dev/projects/sunshine/v0.15.0/about/advanced_usage.html#port
     networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = generatePorts cfg.settings.port [
         (-5) # HTTPS
         0 # HTTP
-        1 # Control
-        21 # Sunshine Service Discovery
+        1 # Web
+        21 # RTSP
       ];
       allowedUDPPorts = generatePorts cfg.settings.port [
-        9 # Audio
-        10 # Video
-        11 # Input
-        13 # Discovery / Server-Sent Events
-        21 # Sunshine Service Discovery
+        9 # Video
+        10 # Control
+        11 # Audio
+        13 # Mic (unused)
       ];
     };
 
     # Kernel module for virtual input devices
     boot.kernelModules = ["uinput"];
 
-    # Udev rules (your Apollo flake already installs these via CMake)
+    # Udev rules made by the derivation
     services.udev.packages = [cfg.package];
 
     # Avahi for service discovery (mDNS)

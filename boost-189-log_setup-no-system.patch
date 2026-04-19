@@ -1,0 +1,28 @@
+diff --git a/cmake/dependencies/Boost_Sunshine.cmake b/cmake/dependencies/Boost_Sunshine.cmake
+index 0bffabc..b82c2e6 100644
+--- a/cmake/dependencies/Boost_Sunshine.cmake
++++ b/cmake/dependencies/Boost_Sunshine.cmake
+@@ -8,8 +8,8 @@ set(BOOST_COMPONENTS
+         filesystem
+         locale
+         log
++        log_setup
+         program_options
+-        system
+ )
+ # system is not used by Sunshine, but by Simple-Web-Server, added here for convenience
+
+diff --git a/third-party/Simple-Web-Server/CMakeLists.txt b/third-party/Simple-Web-Server/CMakeLists.txt
+index 78c94e5..d92c8dd 100644
+--- a/third-party/Simple-Web-Server/CMakeLists.txt
++++ b/third-party/Simple-Web-Server/CMakeLists.txt
+@@ -41,8 +41,7 @@ if(USE_STANDALONE_ASIO)
+         target_include_directories(simple-web-server SYSTEM INTERFACE ${ASIO_PATH})
+     endif()
+ else()
+-    find_package(Boost 1.53.0 COMPONENTS system REQUIRED)
+-    target_link_libraries(simple-web-server INTERFACE Boost::boost Boost::system)
++    target_link_libraries(simple-web-server INTERFACE Boost::boost)
+     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.9)
+         target_compile_definitions(simple-web-server INTERFACE USE_BOOST_REGEX)
+         find_package(Boost 1.53.0 COMPONENTS regex REQUIRED)
